@@ -176,6 +176,14 @@ plot(hc, labels = FALSE, main = "Hierarchical cluster based only on original dat
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
+```r
+print("Please find detail in .pdf file")
+```
+
+```
+## [1] "Please find detail in .pdf file"
+```
+
 
 Distribution for different number of clusters are (ranging from 2 to 15 clusters):
 
@@ -277,10 +285,9 @@ for (numClusters in c(2:15)) {
         print(memCluster)
         
         print(which(mCluster == memCluster))
-        splom(~data_orig, groups = mCluster, auto.key = TRUE)
+        # print('Scatter plot for different observations are:')
+        # print(splom(~data_orig,groups=mCluster,auto.key=TRUE))
     }
-    
-    
 }
 ```
 
@@ -884,10 +891,6 @@ for (numClusters in c(2:15)) {
 ## [1] 243
 ```
 
-```r
-
-```
-
 
 # Hierarchical cluster based only on ratio data
 
@@ -919,6 +922,14 @@ plot(hc, labels = FALSE, main = "Hierarchical cluster based only on ratio data")
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
+```r
+print("Please find detail in .pdf file")
+```
+
+```
+## [1] "Please find detail in .pdf file"
+```
+
 
 For each cluster, the members are:
 
@@ -939,10 +950,9 @@ for (numClusters in c(2:15)) {
         print(memCluster)
         
         print(which(mCluster == memCluster))
-        splom(~data_ratio, groups = mCluster, auto.key = TRUE)
+        # print('Scatter plot for different observations are:')
+        # print(splom(~data_ratio,groups=mCluster,auto.key=TRUE))
     }
-    
-    
 }
 ```
 
@@ -1587,6 +1597,14 @@ plot(hc, labels = FALSE, main = "Hierarchical cluster based on all data")
 
 ![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
+```r
+print("Please find detail in .pdf file")
+```
+
+```
+## [1] "Please find detail in .pdf file"
+```
+
 
 For each cluster, the members are:
 
@@ -1607,10 +1625,9 @@ for (numClusters in c(2:15)) {
         print(memCluster)
         
         print(which(mCluster == memCluster))
-        splom(~data_all, groups = mCluster, auto.key = TRUE)
+        # print('Scatter plot for different observations are:')
+        # print(splom(~data_all,groups=mCluster,auto.key=TRUE))
     }
-    
-    
 }
 ```
 
@@ -2212,9 +2229,5 @@ for (numClusters in c(2:15)) {
 ## [1] "members of cluster "
 ## [1] 15
 ## [1] 243
-```
-
-```r
-
 ```
 
