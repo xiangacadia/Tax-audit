@@ -1,0 +1,160 @@
+Hierarchical Cluster Analysis for Tax Data
+========================================================
+
+# Preprocessing
+
+1.Remove all the "DIV/0!" with "0".
+
+2.Copy and paste spacial with only values to another worksheet.
+
+# Load data into workspace
+
+```{r}
+library(xlsx)
+library(lattice)
+
+## set word directory
+setwd("/Users/xiangjiang/Documents/Tax/data/nashuipinggushuju/Chu Bu Zheng Li Shu Ju/qiyesuodeshuipeibishuju/")
+
+## read data
+data <- read.xlsx("08-09peibishuju.xls", sheetName="Sheet2")
+
+## remove irrelevant attributes
+data[c("纳税人识别号","所属年度","纳税人名称.1","纳税人识别号.1","所属时期")] <- list(NULL)
+
+## summary of data
+summary(data)
+```
+
+# Hierarchical cluster based only on original data
+Here original data refers to data without ratio.
+
+```{r}
+data_orig <- data[2:29]
+
+## computes and returns the distance matrix computed by using the specified distance measure to compute the distances between the rows of a data matrix
+d <- dist(as.matrix(data_orig))
+
+## apply hirarchical clustering 
+hc <- hclust(d)
+
+pdf( "Hierarchical cluster based only on original data.pdf", width = 50, height = 50 )
+## plot the dendrogram
+plot(hc, main = "Hierarchical cluster based only on original data")
+dev.off()
+plot(hc, labels=FALSE, main = "Hierarchical cluster based only on original data")
+print("Please find detail in .pdf file")
+```
+
+Distribution for different number of clusters are (ranging from 2 to 15 clusters):
+```{r}
+counts = sapply(2:15,function(ncl)table(cutree(hc,ncl)))
+names(counts) = 2:15
+counts
+```
+
+For each cluster, the members are:
+```{r}
+## we pass the cutree function the cluster object and the number of clusters we're interested in
+## Cuts a tree, e.g., as resulting from hclust, into several groups either by specifying 
+## the desired number(s) of groups or the cut height(s).
+
+for(numClusters in c(2:15)){
+    print("===============================")
+    print("When number of clusters are:")
+    print(numClusters)
+    mCluster = cutree(hc, numClusters)
+    
+    for(memCluster in c(1:numClusters)){
+        print("members of cluster ")
+        print(memCluster)
+        
+        print(which(mCluster == memCluster))
+        print("Scatter plot for different observations are:")
+        print(splom(~data_orig,groups=mCluster,auto.key=TRUE))
+    }   
+}
+```
+
+# Hierarchical cluster based only on ratio data
+```{r}
+data_ratio <- data[30:44]
+
+## computes and returns the distance matrix computed by using the specified distance measure to compute the distances between the rows of a data matrix
+d <- dist(as.matrix(data_ratio))
+
+## apply hirarchical clustering 
+hc <- hclust(d)
+
+pdf( "Hierarchical cluster based only on ratio data.pdf", width = 50, height = 50 )
+## plot the dendrogram
+plot(hc, main = "Hierarchical cluster based only on ratio data")
+dev.off()
+plot(hc, labels=FALSE, main = "Hierarchical cluster based only on ratio data")
+print("Please find detail in .pdf file")
+```
+
+For each cluster, the members are:
+```{r}
+## we pass the cutree function the cluster object and the number of clusters we're interested in
+## Cuts a tree, e.g., as resulting from hclust, into several groups either by specifying 
+## the desired number(s) of groups or the cut height(s).
+
+for(numClusters in c(2:15)){
+    print("===============================")
+    print("When number of clusters are:")
+    print(numClusters)
+    mCluster = cutree(hc, numClusters)
+    
+    for(memCluster in c(1:numClusters)){
+        print("members of cluster ")
+        print(memCluster)
+        
+        print(which(mCluster == memCluster))
+        print("Scatter plot for different observations are:")
+        print(splom(~data_ratio,groups=mCluster,auto.key=TRUE))
+    }
+}
+
+```
+
+# Hierarchical cluster based on all data
+```{r}
+data_all <- data[2:44]
+
+## computes and returns the distance matrix computed by using the specified distance measure to compute the distances between the rows of a data matrix
+d <- dist(as.matrix(data_all))
+
+## apply hirarchical clustering 
+hc <- hclust(d)
+
+pdf( "Hierarchical cluster based on all data.pdf", width = 50, height = 50 )
+## plot the dendrogram
+plot(hc, main = "Hierarchical cluster based on all data")
+dev.off()
+plot(hc, labels=FALSE, main = "Hierarchical cluster based on all data")
+print("Please find detail in .pdf file")
+```
+
+For each cluster, the members are:
+```{r}
+## we pass the cutree function the cluster object and the number of clusters we're interested in
+## Cuts a tree, e.g., as resulting from hclust, into several groups either by specifying 
+## the desired number(s) of groups or the cut height(s).
+
+for(numClusters in c(2:15)){
+    print("===============================")
+    print("When number of clusters are:")
+    print(numClusters)
+    mCluster = cutree(hc, numClusters)
+    
+    for(memCluster in c(1:numClusters)){
+        print("members of cluster ")
+        print(memCluster)
+        
+        print(which(mCluster == memCluster))
+        print("Scatter plot for different observations are:")
+        print(splom(~data_all,groups=mCluster,auto.key=TRUE))
+    }   
+}
+```
