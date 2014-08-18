@@ -12,12 +12,12 @@ set.seed(13343)
 
 # Impute and standarize data
 preImputeObj <- preProcess(Boston, method="knnImpute")
-Boston <- predict(preImputeObj, Boston)
+Boston <- predict(preImputeObj, Boston) +0.5
 
 # In function [createDataPartition]
 # - y should be a vector, not a data frame
 # - default value for list is TRUE 
-inTrain <- createDataPartition(y = Boston$medv, p = 0.6, list = FALSE)
+inTrain <- createDataPartition(y = Boston$medv, p = 0.9, list = FALSE)
 
 training_x <- Boston[inTrain, 2:length(Boston)]
 testing_x <- Boston[-inTrain, 2:length(Boston)]
@@ -25,8 +25,17 @@ testing_x <- Boston[-inTrain, 2:length(Boston)]
 training_y <- Boston[inTrain, 1]
 testing_y <- Boston[-inTrain, 1]
 
+####################
+# Training
+####################
+
+# tuneGrid: a data frame with possible tuning values. 
+my.grid <- expand.grid(.size = c(11, 10, 1))
+
 # Training
 modFit <- train(x=training_x,y=training_y, method = "nnet", hidden = 30)
+
+# Make predictions
 predicted_y <- predict(modFit, training_x)
 
 # For visualization
