@@ -1,6 +1,9 @@
 Hierarchical Cluster Analysis for Tax Data
 ========================================================
 
+# Synopsis 
+In this report we aim to find out the proper way to detect outliers in tax data, especially which type of data to use in the analysis. Three different approaches are explored: Hierarchical cluster based only on original data, Hierarchical cluster based only on ratio data and Hierarchical cluster based only on all data. Since no labels in the dataset are avalible, the performance of this analysis is to be evaluated by hand.
+
 # Preprocessing
 
 1.Remove all the "DIV/0!" with "0".
@@ -893,6 +896,8 @@ for (numClusters in c(2:15)) {
 
 
 # Hierarchical cluster based only on ratio data
+Here ratio data refers to data computed with formulars in Excel.
+
 
 ```r
 data_ratio <- data[30:44]
@@ -1568,6 +1573,7 @@ for (numClusters in c(2:15)) {
 
 
 # Hierarchical cluster based on all data
+Here all data refers to the original data as well as ratio data.
 
 ```r
 data_all <- data[2:44]

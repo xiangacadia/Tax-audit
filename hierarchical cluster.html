@@ -181,6 +181,10 @@ hljs.initHighlightingOnLoad();
 <body>
 <h1>Hierarchical Cluster Analysis for Tax Data</h1>
 
+<h1>Synopsis</h1>
+
+<p>In this report we aim to find out the proper way to detect outliers in tax data, especially which type of data to use in the analysis. Three different approaches are explored: Hierarchical cluster based only on original data, Hierarchical cluster based only on ratio data and Hierarchical cluster based only on all data. Since no labels in the dataset are avalible, the performance of this analysis is to be evaluated by hand.</p>
+
 <h1>Preprocessing</h1>
 
 <p>1.Remove all the &ldquo;DIV/0!&rdquo; with &ldquo;0&rdquo;.</p>
@@ -1056,6 +1060,8 @@ for (numClusters in c(2:15)) {
 
 <h1>Hierarchical cluster based only on ratio data</h1>
 
+<p>Here ratio data refers to data computed with formulars in Excel.</p>
+
 <pre><code class="r">data_ratio &lt;- data[30:44]
 
 ## computes and returns the distance matrix computed by using the specified
@@ -1721,6 +1727,8 @@ for (numClusters in c(2:15)) {
 </code></pre>
 
 <h1>Hierarchical cluster based on all data</h1>
+
+<p>Here all data refers to the original data as well as ratio data.</p>
 
 <pre><code class="r">data_all &lt;- data[2:44]
 
